@@ -16,6 +16,9 @@ Basic.args = { children: 'Label' };
 
 export const All = () => (
   <>
+    <Button appearance="primary" isRounded={false}>
+      Square
+    </Button>
     <Button appearance="primary">Primary</Button>
     <Button appearance="secondary">Secondary</Button>
     <Button appearance="tertiary">Tertiary</Button>

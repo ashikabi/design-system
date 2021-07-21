@@ -37,7 +37,7 @@ const SIZES = {
 
 export const StyledButton = styled.button`
   border: 0;
-  border-radius: 3em;
+  border-radius: ${(props) => (props.isRounded ? '3em' : '0em')};
   cursor: pointer;
   display: inline-block;
   overflow: hidden;
@@ -333,7 +333,17 @@ const ButtonLink = styled.a``;
 // tag which would throw warnings for non-standard props.
 const ButtonComponentPicker = forwardRef(
   (
-    { appearance, ButtonWrapper, containsIcon, isLink, isLoading, isUnclickable, size, ...rest },
+    {
+      appearance,
+      ButtonWrapper,
+      containsIcon,
+      isLink,
+      isLoading,
+      isUnclickable,
+      size,
+      isRounded,
+      ...rest
+    },
     ref
   ) => {
     // Use the UnstyledButton here to avoid duplicating styles and creating
@@ -361,6 +371,7 @@ const buttonStyleProps = {
   */
   isUnclickable: PropTypes.bool,
   size: PropTypes.oneOf(Object.values(SIZES)),
+  isRounded: PropTypes.bool,
 };
 
 const buttonStyleDefaultProps = {
@@ -371,6 +382,7 @@ const buttonStyleDefaultProps = {
   containsIcon: false,
   size: SIZES.MEDIUM,
   ButtonWrapper: undefined,
+  isRounded: true,
 };
 
 ButtonComponentPicker.propTypes = {
@@ -382,7 +394,7 @@ ButtonComponentPicker.defaultProps = {
 };
 
 export const Button = forwardRef(
-  ({ children, isDisabled, isLoading, loadingText, ...rest }, ref) => {
+  ({ children, isDisabled, isLoading, loadingText, isRounded, ...rest }, ref) => {
     const content = (
       <>
         <Text>{children}</Text>
@@ -395,6 +407,7 @@ export const Button = forwardRef(
         as={ButtonComponentPicker}
         disabled={isDisabled}
         isLoading={isLoading}
+        isRounded={isRounded}
         ref={ref}
         {...rest}
       >
